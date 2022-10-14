@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <h1>Edit Profile</h1>
+  <body>
+    <form action="/editProfileProcess/<%=thisUser._id%>" method="post">
+      <% for (x in thisUser){%> <%if (x == "email"){%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="text"
+        name="<%=x%>"
+        value="<%=thisUser[x]%>"
+        placeholder="email"
+        required
+      />
+      <%} else if (x == "name") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="text"
+        name="<%=x%>"
+        value="<%=thisUser[x]%>"
+        placeholder="name"
+        required
+      />
+      <%} else if (x == "idcard") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="number"
+        name="<%=x%>"
+        value="<%=thisUser[x]%>"
+        placeholder="idcard"
+        required
+      />
+      <%} else if (x == "birthdate") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input type="date" name="<%=x%>" value="<%=thisUser[x]%>" required />
+      <%} else if (x == "password") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input type="text" name="<%=x%>" value="<%=thisUser[x]%>" required />
+      <%} else if (x == "role" && user.role == "admin") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input type="text" name="<%=x%>" value="<%=thisUser[x]%>" required />
+      <%} else if (x == "event" && user.role == "admin") {%>
+      <label for="selectevent"><%=x%></label>
+      <select name="selectevent">
+        <%if(nowEvent != "none"){%>
+        <option value="<%=nowEvent._id%>">
+          Now : <%=nowEvent.eventname%> [Age <%=nowEvent.eventminage%> -
+          <%=nowEvent.eventmaxage%>] [DATE <%=nowEvent.eventstartdate%> to
+          <%=nowEvent.eventenddate%>]
+        </option>
+        <%} else {%>
+        <option value="none">Now : none</option>
+        <%}%> <% for (y in listEvent){%>
+        <option value="<%=listEvent[y]._id%>">
+          <%=listEvent[y].eventname%> [Age <%=listEvent[y].eventminage%> -
+          <%=listEvent[y].eventmaxage%>] [DATE <%=listEvent[y].eventstartdate%>
+          to <%=listEvent[y].eventenddate%>]
+        </option>
+        <%}%> <% if(nowEvent != "none") {%>
+        <option value="none">reset to none</option>
+        <%}%>
+      </select>
+      <%}%> <%}%>
+      <button type="submit">Submit</button>
+    </form>
+    <form>
+      <button formaction="/">home</button>
+    </form>
+  </body>
+  <style>
+    body {
+      margin: auto;
+      width: 50%;
+      background-color: antiquewhite;
+    }
+  </style>
+</html>

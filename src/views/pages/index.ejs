@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>INDEX</h1>
+    <h1>welcome : <%=user.name%> [<%=user.role%>]</h1>
+    <form action="/editprofile/<%=user._id%>">
+      <button type="submit">edit profile</button>
+    </form>
+    <h1>
+      your event : <% if (userEvent != "none"){%> <%=userEvent%>
+      <form action="/userRemoveEvent" method="post">
+        <button type="submit">remove event</button>
+      </form>
+      <%} else {%> <%=userEvent%>
+      <form><button formaction="/getevent">get event</button></form>
+      <%}%>
+    </h1>
+    <form action="/logout" method="post">
+      <button type="submit">logout</button>
+    </form>
+    <hr />
+    <%if (user.role == 'admin'){%>
+    <form>
+      <button formaction="/admin">admin</button>
+      <button formaction="/listAllUser">list user</button>
+    </form>
+    <hr />
+    <%}%>
+    <table>
+      <th style="border: 1px solid black">Event Name</th>
+      <th style="border: 1px solid black">Min Age</th>
+      <th style="border: 1px solid black">Max Age</th>
+      <th style="border: 1px solid black">Start</th>
+      <th style="border: 1px solid black">End</th>
+      <th style="border: 1px solid black">Action</th>
+      <% for (x in listEvent){%>
+      <tr>
+        <td><%=listEvent[x].eventname%></td>
+        <td><%=listEvent[x].eventminage%></td>
+        <td><%=listEvent[x].eventmaxage%></td>
+        <td><%=listEvent[x].eventstartdate%></td>
+        <td><%=listEvent[x].eventenddate%></td>
+        <td>
+          <form>
+            <button formaction="/checkevent/<%=listEvent[x]._id%>">
+              check
+            </button>
+          </form>
+        </td>
+      </tr>
+      <%}%>
+    </table>
+  </body>
+  <style>
+    body {
+      margin: auto;
+      width: 60%;
+      background-color: antiquewhite;
+    }
+    table {
+      margin: auto;
+      width: 70%;
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <h1>ADMIN</h1>
+  <body>
+    <form action="/adminAddNewEvent" method="post">
+      <input type="text" name="eventname" placeholder="name" required />
+      <input type="number" name="eventminage" placeholder="minage" required />
+      <input type="number" name="eventmaxage" placeholder="maxage" required />
+      <input type="date" name="eventstartdate" required />
+      <input type="date" name="eventenddate" required />
+      <button type="submit">Add Event</button>
+    </form>
+    <form>
+      <button formaction="/">home</button>
+    </form>
+    <hr />
+    <table>
+      <th style="border: 1px solid black">Event Name</th>
+      <th style="border: 1px solid black">Min Age</th>
+      <th style="border: 1px solid black">Max Age</th>
+      <th style="border: 1px solid black">Start</th>
+      <th style="border: 1px solid black">End</th>
+      <th style="border: 1px solid black">Action</th>
+      <th style="border: 1px solid black">Action</th>
+      <th style="border: 1px solid black">Action</th>
+      <% for (x in listEvent){%>
+      <tr>
+        <td><%=listEvent[x].eventname%></td>
+        <td><%=listEvent[x].eventminage%></td>
+        <td><%=listEvent[x].eventmaxage%></td>
+        <td><%=listEvent[x].eventstartdate%></td>
+        <td><%=listEvent[x].eventenddate%></td>
+        <td>
+          <form action="/adminDeleteEvent/<%=listEvent[x]._id%>" method="post">
+            <button type="submit">delete</button>
+          </form>
+        </td>
+        <td>
+          <form action="/editevent/<%=listEvent[x]._id%>">
+            <button type="submit">edit</button>
+          </form>
+        </td>
+        <td>
+          <form>
+            <button formaction="/checkevent/<%=listEvent[x]._id%>">
+              check
+            </button>
+          </form>
+        </td>
+      </tr>
+      <%}%>
+    </table>
+  </body>
+  <style>
+    body {
+      margin: auto;
+      width: 50%;
+      background-color: antiquewhite;
+    }
+    table {
+      margin: auto;
+      width: 100%;
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
+</html>

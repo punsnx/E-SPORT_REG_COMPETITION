@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <h1>Edit Event : <%=thisEvent.eventname%></h1>
+  <h2>[AGE <%=thisEvent.eventminage%> - <%=thisEvent.eventmaxage%>]</h2>
+  <h2>[DATE <%=thisEvent.eventstartdate%> to <%=thisEvent.eventenddate%>]</h2>
+  <body>
+    <form action="/adminEditEvent/<%=thisEvent._id%>" method="post">
+      <% for (x in thisEvent){%> <%if (x == "eventname"){%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="text"
+        name="<%=x%>"
+        value="<%=thisEvent[x]%>"
+        placeholder="eventname"
+        required
+      />
+      <%} else if (x == "eventminage") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="number"
+        name="<%=x%>"
+        value="<%=thisEvent[x]%>"
+        placeholder="minage"
+        required
+      />
+      <%} else if (x == "eventmaxage") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input
+        type="number"
+        name="<%=x%>"
+        value="<%=thisEvent[x]%>"
+        placeholder="maxage"
+        required
+      />
+      <%} else if (x == "eventstartdate") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input type="date" name="<%=x%>" value="<%=thisEvent[x]%>" required />
+      <%} else if (x == "eventenddate") {%>
+      <label for="<%=x%>"><%=x%></label>
+      <input type="date" name="<%=x%>" value="<%=thisEvent[x]%>" required />
+      <%}%> <%}%>
+      <button type="submit">Submit</button>
+    </form>
+    <form>
+      <button formaction="/admin">admin</button>
+      <button formaction="/">home</button>
+    </form>
+  </body>
+  <style>
+    body {
+      margin: auto;
+      width: 50%;
+      background-color: antiquewhite;
+    }
+  </style>
+</html>

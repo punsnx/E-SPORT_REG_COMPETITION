@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>List User</h1>
+    <table>
+      <th style="border: 1px solid black">Name</th>
+      <th style="border: 1px solid black">Email</th>
+      <th style="border: 1px solid black">ID Card</th>
+      <th style="border: 1px solid black">Brithdate</th>
+      <th style="border: 1px solid black">Age</th>
+      <th style="border: 1px solid black">Role</th>
+      <%if(user.role == 'admin'){%>
+      <th style="border: 1px solid black">Action</th>
+      <th style="border: 1px solid black">Action</th>
+      <%}%> <% for (x in listUser){%>
+      <tr>
+        <td><%=listUser[x].name%></td>
+        <td><%=listUser[x].email%></td>
+        <td><%=listUser[x].idcard%></td>
+        <td><%=listUser[x].birthdate%></td>
+        <td><%=listUser[x].age%></td>
+        <td><%=listUser[x].role%></td>
+        <%if(user.role == 'admin'){%>
+        <td>
+          <form action="/editprofile/<%=listUser[x]._id%>">
+            <button type="submit">edit profile</button>
+          </form>
+        </td>
+        <td>
+          <% if (user._id != listUser[x]._id){%>
+          <form
+            action="/adminDeleteUserFromDB/<%=listUser[x]._id%>"
+            method="post"
+          >
+            <button type="submit">delete user</button>
+          </form>
+          <%} else {%>
+          <p>-</p>
+          <%}%>
+        </td>
+        <%}%>
+      </tr>
+      <%}%>
+    </table>
+    <form>
+      <button formaction="/">home</button>
+    </form>
+  </body>
+  <style>
+    body {
+      margin: auto;
+      width: 50%;
+      background-color: antiquewhite;
+    }
+    table {
+      margin: auto;
+      width: 100%;
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
+</html>
